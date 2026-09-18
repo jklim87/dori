@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6efe2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="자식된 도리" />
+  <title>자식된 도리</title>
+  <meta name="description" content="가족 행사 기록 아카이브. 매년 돌아오는 행사에 뭘 했는지 잊지 않도록." />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="header">
+      <img class="logo" src="assets/logo.png" alt="" />
+      <div>
+        <h1>자식된 도리</h1>
+        <div class="sub">가족 행사 기록 아카이브</div>
+      </div>
+      <div class="spacer"></div>
+      <span class="mode-badge" id="modeBadge" hidden></span>
+    </header>
+
+    <main id="view" aria-live="polite">
+      <div class="loading">불러오는 중...</div>
+    </main>
+
+    <footer class="footer">
+      <span id="footerText"></span>
+    </footer>
+  </div>
+
+  <nav class="tabbar" aria-label="탭">
+    <div class="inner" id="tabs">
+      <button class="tab" data-family="common"><span class="ico">🏠</span>공통</button>
+      <button class="tab" data-family="salt"><img class="ico" src="assets/salt.svg" alt="" />소금이네<span class="lock">🔒</span></button>
+      <button class="tab" data-family="bean"><img class="ico" src="assets/bean.svg" alt="" />콩콩이네<span class="lock">🔒</span></button>
+    </div>
+  </nav>
+
+  <button class="fab" id="fab" title="이벤트 등록" aria-label="이벤트 등록" hidden>＋</button>
+  <div class="toast" id="toast" role="status"></div>
+  <div id="modalRoot"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

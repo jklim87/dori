@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- 선물 상자 -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7efe1"/>
+      <stop offset="1" stop-color="#eadfca"/>
+    </linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c84b53"/>
+      <stop offset="1" stop-color="#a8323a"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d95a62"/>
+      <stop offset="1" stop-color="#b93c44"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="62" fill="url(#bg)" stroke="#5a3e2b" stroke-width="3"/>
+  <!-- 상자 몸통 -->
+  <rect x="30" y="58" width="68" height="46" rx="5" fill="url(#box)" stroke="#6e1f25" stroke-width="2.5"/>
+  <!-- 뚜껑 -->
+  <rect x="24" y="44" width="80" height="20" rx="5" fill="url(#lid)" stroke="#6e1f25" stroke-width="2.5"/>
+  <!-- 세로 리본 -->
+  <rect x="57" y="44" width="14" height="60" fill="#f1c85a" stroke="#b78a3c" stroke-width="2"/>
+  <!-- 가로 리본(뚜껑) -->
+  <rect x="24" y="50" width="80" height="8" fill="#f1c85a" stroke="#b78a3c" stroke-width="1.5"/>
+  <!-- 리본 매듭 -->
+  <path d="M64 44 C52 30 38 30 40 40 C42 48 56 46 64 44 Z" fill="#f1c85a" stroke="#b78a3c" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M64 44 C76 30 90 30 88 40 C86 48 72 46 64 44 Z" fill="#f1c85a" stroke="#b78a3c" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="64" cy="44" r="5" fill="#e0ad3c" stroke="#b78a3c" stroke-width="2"/>
+  <!-- 하이라이트 -->
+  <path d="M36 66 v30" stroke="#ffffff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- 초록 콩깍지와 콩알 -->
+  <defs>
+    <linearGradient id="pod" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6cb75a"/>
+      <stop offset="1" stop-color="#3f8a3a"/>
+    </linearGradient>
+    <radialGradient id="pea" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#b6e58f"/>
+      <stop offset="1" stop-color="#5aa843"/>
+    </radialGradient>
+  </defs>
+  <!-- 꼭지 -->
+  <path d="M8 22 q-4 -6 2 -9 q4 3 3 8" fill="#3f8a3a" stroke="#2f6b2b" stroke-width="1.5"/>
+  <!-- 깍지 뒷면 -->
+  <path d="M10 22 C 14 44, 42 58, 58 38 C 56 30, 46 18, 10 22 Z" fill="url(#pod)" stroke="#2f6b2b" stroke-width="2" stroke-linejoin="round"/>
+  <!-- 콩알 -->
+  <circle cx="20" cy="30" r="6.5" fill="url(#pea)" stroke="#2f6b2b" stroke-width="1.5"/>
+  <circle cx="33" cy="35" r="7" fill="url(#pea)" stroke="#2f6b2b" stroke-width="1.5"/>
+  <circle cx="46" cy="36" r="6" fill="url(#pea)" stroke="#2f6b2b" stroke-width="1.5"/>
+  <!-- 깍지 앞면(아랫입술) -->
+  <path d="M10 22 C 12 40, 36 56, 58 38 C 44 48, 22 44, 10 22 Z" fill="#4f9c44" stroke="#2f6b2b" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <!-- 하이라이트 -->
+  <path d="M16 26 q14 -2 30 6" stroke="#ffffff" stroke-opacity=".35" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

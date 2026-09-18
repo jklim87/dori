@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 가족용 소규모 앱: 데이터 읽기/쓰기는 모두 허용하되 스키마만 가볍게 검증합니다.
+    // 실제 열람 제한은 클라이언트의 비밀번호 게이트(auth 컬렉션 해시 비교)로 처리합니다.
+
+    match /auth/{key} {
+      allow read: if true;
+      // 한 번 설정된 비밀번호 해시는 덮어쓸 수 없음 (리셋은 코드의 PASSWORD_VERSION 증가로 처리)
+      allow create: if request.resource.data.keys().hasOnly(['hash', 'createdAt'])
+                    && request.resource.data.hash is string
+                    && request.resource.data.hash.size() == 64;
+      allow update, delete: if false;
+    }
+
+    match /events/{eventId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.family in ['common', 'salt', 'bean']
+                            && request.resource.data.title is string
+                            && request.resource.data.title.size() > 0
+                            && request.resource.data.title.size() <= 100
+                            && request.resource.data.type in ['annual', 'once']
+                            && request.resource.data.calendar in ['solar', 'lunar']
+                            && request.resource.data.month is int
+                            && request.resource.data.day is int
+                            && (request.resource.data.type == 'annual'
+                                || request.resource.data.year is int);
+      allow delete: if true;
+
+      match /logs/{logId} {
+        allow read: if true;
+        allow create, update: if request.resource.data.year is int
+                              && request.resource.data.content is string
+                              && request.resource.data.content.size() <= 2000;
+        allow delete: if true;
+      }
+    }
+  }
+}
