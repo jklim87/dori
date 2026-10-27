@@ -11,7 +11,8 @@ css/style.css         스타일
 js/app.js             화면/라우팅/비밀번호 게이트
 js/db.js              저장소 어댑터 (Firestore 또는 로컬 localStorage)
 js/lunar.js           음력/양력 변환 (korean-lunar-calendar CDN 사용)
-js/firebase-config.js Firebase 설정 + 비밀번호 리셋 버전
+js/firebase-config.js Firebase 설정
+js/password-version.json 비밀번호 리셋 버전 (매번 새로 읽음)
 assets/logo.svg       아이콘 (선물 상자)
 assets/salt.svg       소금이네 탭 아이콘 (유리 소금통)
 assets/bean.svg       콩콩이네 탭 아이콘 (콩깍지)
@@ -65,15 +66,22 @@ python -m http.server 8765
 
 ### 비밀번호 리셋 (관리자)
 
-`js/firebase-config.js`의 `PASSWORD_VERSION`에서 해당 가정의 숫자를 1 올리고 배포하면
-기존 비밀번호가 무효화되고, 다음 접속자가 새 비밀번호를 설정하게 된다.
+`js/password-version.json`에서 해당 가정의 숫자를 1 올리고 배포하면
+기존 비밀번호가 무효화되고, 다음 접속자가 새 비밀번호를 설정하게 된다. 기록 데이터는 그대로 유지된다.
 
-```js
-export const PASSWORD_VERSION = {
-  salt: 2,   // 1 -> 2 로 올리면 소금이네 비밀번호 리셋
-  bean: 1,
-};
+```json
+{
+  "salt": 1,
+  "bean": 3
+}
 ```
+
+이 파일은 캐시 없이 매번 새로 받아오므로 배포 직후 모든 기기에 바로 적용된다.
+
+### 코드 수정 후 배포 시
+
+`index.html`과 `js/app.js`의 `?v=` 버전 태그를 함께 올린다. GitHub Pages는 파일을 10분간 캐시하므로,
+태그를 바꾸지 않으면 휴대폰(특히 카카오톡 인앱 브라우저)에서 예전 코드가 계속 실행될 수 있다.
 
 ## 데이터 구조 (Firestore)
 

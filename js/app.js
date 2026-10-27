@@ -1,9 +1,9 @@
-import { firebaseConfig, PASSWORD_VERSION } from "./firebase-config.js";
-import { createDb } from "./db.js";
+import { firebaseConfig } from "./firebase-config.js?v=20261027a";
+import { createDb } from "./db.js?v=20261027a";
 import {
   nextOccurrence, diffDays, formatEventDate, formatSolar, weekdayKo,
   lunarToSolar, solarToLunar,
-} from "./lunar.js";
+} from "./lunar.js?v=20261027a";
 
 /* ---------------- 상수 ---------------- */
 const FAMILIES = {
@@ -24,6 +24,7 @@ const state = {
   eventId: null,
   openYear: null,         // 상세에서 펼쳐진 연도 카드
   unlocked: { salt: false, bean: false },
+  pwVersion: null,       // { salt, bean } from password-version.json
   cache: { events: {}, logs: {} },
 };
 
@@ -48,7 +49,19 @@ async function sha256(text) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
-function authKey(family) { return `${family}_v${PASSWORD_VERSION[family] || 1}`; }
+function authKey(family) {
+  const v = state.pwVersion?.[family];
+  if (!v) throw new Error("비밀번호 설정을 불러오지 못했습니다. 새로고침 해주세요.");
+  return `${family}_v${v}`;
+}
+/** 비밀번호 리셋 버전: 브라우저 캐시를 거치지 않고 매번 새로 받아온다. */
+async function loadPasswordVersion() {
+  const url = new URL("./password-version.json", import.meta.url);
+  url.searchParams.set("t", Date.now());
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`password-version.json ${res.status}`);
+  return res.json();
+}
 function unlockStoreKey(family) { return `jd:unlock:${authKey(family)}`; }
 function thisYear() { return new Date().getFullYear(); }
 function familyIcon(family, size = 56) {
@@ -652,6 +665,11 @@ async function init() {
   document.querySelectorAll(".tab").forEach((t) => {
     t.addEventListener("click", () => { state.filter = "all"; navigate(t.dataset.family); });
   });
+  try {
+    state.pwVersion = await loadPasswordVersion();
+  } catch (e) {
+    console.warn("비밀번호 버전 로드 실패", e);
+  }
   try {
     state.db = await createDb(firebaseConfig);
   } catch (e) {

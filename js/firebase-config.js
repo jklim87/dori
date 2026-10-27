@@ -10,9 +10,4 @@ export const firebaseConfig = {
   appId: "1:751866973121:web:6094b19891c20a0b49fd40",
 };
 
-// 비밀번호 리셋용 버전 번호.
-// 숫자를 1 올리면 해당 가정 탭의 기존 비밀번호가 무효화되고, 다음 접속자가 새 비밀번호를 설정하게 됩니다.
-export const PASSWORD_VERSION = {
-  salt: 1,   // 소금이네
-  bean: 2,   // 콩콩이네 (2026-10-27 비밀번호 분실로 리셋)
-};
+// 비밀번호 리셋 버전은 js/password-version.json 에서 관리합니다. (캐시 없이 매번 새로 읽음)
