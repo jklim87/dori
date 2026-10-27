@@ -14,5 +14,5 @@ export const firebaseConfig = {
 // 숫자를 1 올리면 해당 가정 탭의 기존 비밀번호가 무효화되고, 다음 접속자가 새 비밀번호를 설정하게 됩니다.
 export const PASSWORD_VERSION = {
   salt: 1,   // 소금이네
-  bean: 1,   // 콩콩이네
+  bean: 2,   // 콩콩이네 (2026-10-27 비밀번호 분실로 리셋)
 };
